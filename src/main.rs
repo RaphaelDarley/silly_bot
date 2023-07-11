@@ -1,5 +1,3 @@
-use std::collections::{HashMap, HashSet};
-
 use anyhow::anyhow;
 use serenity::async_trait;
 use serenity::model::channel::Message;
@@ -7,8 +5,6 @@ use serenity::model::gateway::Ready;
 use serenity::prelude::*;
 use shuttle_secrets::SecretStore;
 use tracing::{error, info};
-
-use once_cell::sync::Lazy;
 
 struct Bot;
 
@@ -36,25 +32,6 @@ async fn serenity(
     } else {
         return Err(anyhow!("'DISCORD_TOKEN' was not found").into());
     };
-
-    let test_word = "a/c";
-    info!(
-        "{} is a noun? {}",
-        test_word,
-        sillybot::sillinesses::you_are_a::CACHE.contains(test_word)
-    );
-    info!(
-        "{:?}",
-        sillybot::sillinesses::you_are_a::CACHE.get(test_word)
-    );
-    info!("{:?} nouns", sillybot::sillinesses::you_are_a::CACHE.len());
-    info!(
-        "{:?}",
-        sillybot::sillinesses::you_are_a::CACHE
-            .iter()
-            .take(20)
-            .collect::<Vec<&&str>>()
-    );
 
     // Set gateway intents, which decides what events the bot will be notified about
     let intents = GatewayIntents::GUILD_MESSAGES | GatewayIntents::MESSAGE_CONTENT;
