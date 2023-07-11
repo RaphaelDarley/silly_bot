@@ -19,7 +19,7 @@ const JOKE_PROB: f64 = 0.01;
 pub async fn run(ctx: Context, msg: Message) {
     let mut rng = SmallRng::from_entropy();
 
-    for word in msg.content.split(" ") {
+    for word in msg.content.split_whitespace() {
         if !CACHE.contains(word) || word == "a" {
             continue;
         }
