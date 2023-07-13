@@ -6,7 +6,7 @@ use serenity::{model::prelude::Message, prelude::Context};
 
 use tracing::{error, info};
 
-static NOUNS: &'static str = include_str!("A:/_Coding/Rust/silly_bot/files/nouns_lower.txt");
+static NOUNS: &'static str = include_str!("nouns_lower.txt");
 static CACHE: Lazy<HashSet<&str>> = Lazy::new(|| {
     let num = NOUNS.split("\n").count();
     let mut acc = HashSet::with_capacity(num);
