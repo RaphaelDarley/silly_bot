@@ -17,7 +17,7 @@ jobs:
     - name: Install cargo-binstall
       run: curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
     - name: Install cargo-shuttle
-      run: cargo binstall cargo-shuttle
+      run: cargo binstall cargo-shuttle --force
     - name: Login to shuttle.rs
       run: cargo shuttle login --api-key ${{secrets.SHUTTLE_API_KEY}}
     - name: Create secrets.toml
