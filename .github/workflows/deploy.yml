@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Create secrets.toml
-      run: echo ${{secrets.DISCORD_TOKEN}}
+      run: echo "DISCORD_TOKEN=\"${{secrets.DISCORD_TOKEN}}\""
