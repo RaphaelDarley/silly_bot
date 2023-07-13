@@ -1,0 +1,26 @@
+name: deploy
+
+on:
+  push:
+    branches: [ "master" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Install cargo-binstall
+      run: curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
+    - name: Install cargo-shuttle
+      run: cargo binstall cargo-shuttle
+    - name: Login to shuttle.rs
+      run: cargo shuttle login --api-key ${{secrets.SHUTTLE_API_KEY}}
+    - name: Create secrets.toml
+      run: echo "DISCORD_TOKEN=\"${{secrets.DISCORD_TOKEN}}\"">secrets.toml
+    - name: Deploy to shuttle
+      run: cargo shuttle deploy
